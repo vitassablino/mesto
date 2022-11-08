@@ -1,0 +1,25 @@
+@import url("../blocks/body/body.css");
+@import url("../blocks/page/page.css");
+@import url("../blocks/header/header.css");
+@import url("../blocks/header/__logo/header__logo.css");
+@import url("../blocks/content/content.css");
+@import url("../blocks/profile/profile.css");
+@import url("../blocks/profile/__avatar/profile__avatar.css");
+@import url("../blocks/profile/__info/profile__info.css");
+@import url("../blocks/profile/__name/profile__name.css");
+
+div,
+body,
+p,
+a,
+h1,
+h2,
+h3,
+span,
+nav,
+button,
+header,
+body,
+img {
+  border: 1px red solid;
+}
