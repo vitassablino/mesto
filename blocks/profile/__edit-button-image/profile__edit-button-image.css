@@ -1,0 +1,13 @@
+.profile__edit-button-image {
+  align-self: center;
+  justify-self: center;
+  width: 10px;
+  height: 10px;
+}
+
+@media screen and (max-width: 479px) {
+  .profile__edit-button-image {
+    width: 7.5px;
+    height: 7.5px;
+  }
+}

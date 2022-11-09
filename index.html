@@ -9,14 +9,38 @@
   <body class="body">
     <div class="page">
       <header class="header">
-        <img src="./images/header__logo.svg" class="header__logo" />
+        <img src="./images/header__logo.svg" class="header__logo" alt="лого" />
       </header>
       <main class="content">
         <section class="profile">
-          <img class="profile__avatar" src="./images/avatar.png" />
-          <div class="profile__info">
-            <p class="profile__name">Жак-Ив Кусто</p>
+          <div class="profile__container">
+            <img
+              class="profile__avatar"
+              src="./images/avatar.png"
+              alt="Аватарка"
+            />
+            <div class="profile__info">
+              <p class="profile__name">Жак-Ив Кусто</p>
+              <button class="profile__edit-button">
+                <img
+                  src="./images/edit.svg"
+                  class="profile__edit-button-image"
+                />
+              </button>
+              <p class="profile__description">Исследователь океана</p>
+            </div>
           </div>
+          <button class="profile__add-button">
+            <img
+              class="profile__add-button-image"
+              src="./images/plus.svg"
+              alt="Добавить"
+            />
+          </button>
+        </section>
+        <section class="popup">
+          <div class="popup__background"></div>
+          <div class="popup__window"></div>
         </section>
       </main>
     </div>
