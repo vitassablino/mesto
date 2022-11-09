@@ -43,11 +43,36 @@
         <div class="popup">
           <div class="popup__background"></div>
           <form class="popup__form">
-            <label class="popup__header">Редактировать профиль</label>
-            <input type="text" name="name" />
-            <input type="text" name="description" />
+            <p class="popup__header">Редактировать профиль</p>
+            <input
+              class="poput__input"
+              type="text"
+              name="name"
+              autocomplete="off"
+              placeholder="Имя"
+              outli
+            />
+            <input
+              class="poput__input"
+              type="text"
+              name="description"
+              autocomplete="off"
+              placeholder="Описание"
+            />
+            <button class="popup__save-button">
+              <p class="popup__save-button-text">Сохранить</p>
+            </button>
+            <button class="popup__close-button">
+              <img
+                src="./images/Close Icon.png"
+                alt="закрыть"
+                class="popup__close-button-image"
+              />
+            </button>
           </form>
         </div>
+
+        <section class="elements"></section>
       </main>
     </div>
   </body>

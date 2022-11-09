@@ -12,7 +12,7 @@
   justify-content: center;
 }
 
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 719px) {
   .profile__edit-button {
     width: 18px;
     height: 18px;

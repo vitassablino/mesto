@@ -2,7 +2,16 @@
   font-family: "Inter";
   font-style: normal;
   font-weight: 900;
-  font-size: 24px;
+  /*  font-size: 24px; */
+  font-size: calc(18px + 6 * (100vw / 1280));
   line-height: 29px;
   color: #000000;
+  margin: 0 0 54px;
+}
+
+@media screen and (max-width: 719px) {
+  .popup__header {
+    font-size: 18px;
+    line-height: 22px;
+  }
 }
