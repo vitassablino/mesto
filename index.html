@@ -11,6 +11,7 @@
       <header class="header">
         <img src="./images/header__logo.svg" class="header__logo" alt="лого" />
       </header>
+
       <main class="content">
         <section class="profile">
           <div class="profile__container">
@@ -38,10 +39,15 @@
             />
           </button>
         </section>
-        <section class="popup">
+
+        <div class="popup">
           <div class="popup__background"></div>
-          <div class="popup__window"></div>
-        </section>
+          <form class="popup__form">
+            <label class="popup__header">Редактировать профиль</label>
+            <input type="text" name="name" />
+            <input type="text" name="description" />
+          </form>
+        </div>
       </main>
     </div>
   </body>
