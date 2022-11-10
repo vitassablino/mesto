@@ -1,5 +1,5 @@
-.popup_active {
-  visibility: visible;
+.poput_active {
+  transform: translate(-50%, -50%) scale(1);
   opacity: 1;
-  transform: scale(1);
+  pointer-events: all;
 }

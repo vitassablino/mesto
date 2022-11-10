@@ -40,37 +40,36 @@
           </button>
         </section>
 
-        <div class="popup popup_inactive">
-          <div class="popup__background"></div>
-          <form class="popup__form">
-            <p class="popup__header">Редактировать профиль</p>
-            <input
-              class="poput__input"
-              type="text"
-              name="name"
-              autocomplete="off"
-              placeholder="Имя"
-              outli
+        <div class="popup__background popup__background_inactive"></div>
+        <form class="popup popup_inactive">
+          <p class="popup__header">Редактировать профиль</p>
+          <input
+            class="poput__input"
+            type="text"
+            name="name"
+            autocomplete="off"
+            placeholder="Имя"
+            id="name"
+          />
+          <input
+            class="poput__input"
+            type="text"
+            name="description"
+            autocomplete="off"
+            placeholder="Описание"
+            id="description"
+          />
+          <button class="popup__save-button">
+            <p class="popup__save-button-text">Сохранить</p>
+          </button>
+          <button class="popup__close-button">
+            <img
+              src="./images/Close Icon.png"
+              alt="закрыть"
+              class="popup__close-button-image"
             />
-            <input
-              class="poput__input"
-              type="text"
-              name="description"
-              autocomplete="off"
-              placeholder="Описание"
-            />
-            <button class="popup__save-button">
-              <p class="popup__save-button-text">Сохранить</p>
-            </button>
-            <button class="popup__close-button">
-              <img
-                src="./images/Close Icon.png"
-                alt="закрыть"
-                class="popup__close-button-image"
-              />
-            </button>
-          </form>
-        </div>
+          </button>
+        </form>
 
         <section class="elements">
           <div class="elements__element">
