@@ -1,0 +1,11 @@
+.elements__element {
+  box-sizing: border-box;
+  height: 361px;
+  max-width: 282px;
+  background: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0 0 30px;
+}

@@ -1,0 +1,15 @@
+.elements__like-button_active {
+  background-image: url("../../../../images/like__active.svg");
+  z-index: 3;
+  animation: filling 5s forwards;
+  opacity: 0.5;
+}
+
+@keyframes filling {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}

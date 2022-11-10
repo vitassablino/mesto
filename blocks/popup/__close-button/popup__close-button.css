@@ -18,6 +18,6 @@
   .popup__close-button {
     transform: translateX(0);
     right: 0;
-    top: -16px;
+    top: -24px;
   }
 }

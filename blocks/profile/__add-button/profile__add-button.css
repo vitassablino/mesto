@@ -12,9 +12,10 @@
   padding: 0;
 }
 
-@media screen and (max-width: 1048px) {
+@media screen and (max-width: 1080px) {
   .profile__add-button {
-    width: 100%;
+    width: calc(100% - 38px);
+    justify-self: center;
   }
 }
 
