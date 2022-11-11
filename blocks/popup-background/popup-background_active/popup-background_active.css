@@ -1,0 +1,4 @@
+.popup-background_active {
+  pointer-events: all;
+  opacity: 0.5;
+}

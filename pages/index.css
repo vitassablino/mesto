@@ -18,9 +18,9 @@
 @import url("../blocks/popup/popup.css");
 @import url("../blocks/popup/_active/popup_active.css");
 @import url("../blocks/popup/_inactive/popup_inactive.css");
-@import url("../blocks/popup/__background/popup__background.css");
-@import url("../blocks/popup/__background/_active/popup__background_active.css");
-@import url("../blocks/popup/__background/_inactive/popup__background_inactive.css");
+@import url("../blocks/popup-background/popup-background.css");
+@import url("../blocks/popup-background/popup-background_active/popup-background_active.css");
+@import url("../blocks/popup-background/popup-background_inactive/popup-background_inactive.css");
 @import url("../blocks/popup/__header/popup__header.css");
 @import url("../blocks/popup/__input/poput__input.css");
 @import url("../blocks/popup/__save-button/popup__save-button.css");
@@ -37,19 +37,3 @@
 @import url("../blocks/elements/__like-button/_inactive/elements__like-button_inactive.css");
 @import url("../blocks/footer/footer.css");
 @import url("../blocks/footer/__copyright/footer__copyright.css");
-
-/* div,
-body,
-p,
-a,
-h1,
-h2,
-h3,
-span,
-nav,
-button,
-header,
-body,
-img {
-  border: 1px red solid;
-} */

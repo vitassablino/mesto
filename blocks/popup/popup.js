@@ -1,7 +1,7 @@
 let editButton = document.querySelector(".profile__edit-button");
 let popup = document.querySelector(".popup");
 let closeButton = document.querySelector(".popup__close-button");
-let background = document.querySelector(".popup__background");
+let background = document.querySelector(".popup-background");
 let saveButton = document.querySelector(".popup__save-button");
 let inputName = document.getElementById("name");
 let name = document.querySelector(".profile__name");
@@ -11,8 +11,8 @@ let likes = document.querySelectorAll(".elements__like-button");
 
 editButton.addEventListener("click", function (open) {
   open.preventDefault();
-  background.classList.add("popup__background_active");
-  background.classList.remove("popup__background_inactive");
+  background.classList.add("popup-background_active");
+  background.classList.remove("popup-background_inactive");
   popup.classList.remove("popup_inactive");
   popup.classList.add("popup_active");
   inputName.value = name.innerText;
@@ -21,8 +21,8 @@ editButton.addEventListener("click", function (open) {
 
 closeButton.addEventListener("click", function (close) {
   close.preventDefault();
-  background.classList.add("popup__background_inactive");
-  background.classList.remove("popup__background_active");
+  background.classList.add("popup-background_inactive");
+  background.classList.remove("popup-background_active");
   popup.classList.remove("popup_active");
   popup.classList.add("popup_inactive");
 });
@@ -31,8 +31,8 @@ saveButton.addEventListener("click", function (save) {
   save.preventDefault();
   name.innerText = inputName.value;
   description.innerText = inputDesription.value;
-  background.classList.add("popup__background_inactive");
-  background.classList.remove("popup__background_active");
+  background.classList.add("popup-background_inactive");
+  background.classList.remove("popup-background_active");
 
   popup.classList.remove("popup_active");
   popup.classList.add("popup_inactive");
