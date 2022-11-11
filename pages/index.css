@@ -22,7 +22,7 @@
 @import url("../blocks/popup-background/popup-background_active/popup-background_active.css");
 @import url("../blocks/popup-background/popup-background_inactive/popup-background_inactive.css");
 @import url("../blocks/popup/__header/popup__header.css");
-@import url("../blocks/popup/__input/poput__input.css");
+@import url("../blocks/popup/__input/popup__input.css");
 @import url("../blocks/popup/__save-button/popup__save-button.css");
 @import url("../blocks/popup/__save-button-text/popup__save-button-text.css");
 @import url("../blocks/popup/__close-button/popup__close-button.css");
