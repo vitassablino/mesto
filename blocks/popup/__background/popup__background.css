@@ -6,4 +6,5 @@
   height: 100%;
   width: 100%;
   transition: opacity 1s ease;
+  z-index: 10;
 }

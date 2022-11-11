@@ -2,6 +2,7 @@
   background-image: url("../../../../images/like__active.svg");
   z-index: 3;
   animation: filling 2s linear;
+  border: 0;
 }
 
 @keyframes filling {
