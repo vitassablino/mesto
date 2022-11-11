@@ -1,8 +1,7 @@
 .elements__like-button_active {
   background-image: url("../../../../images/like__active.svg");
   z-index: 3;
-  animation: filling 5s forwards;
-  opacity: 0.5;
+  animation: filling 2s linear;
 }
 
 @keyframes filling {

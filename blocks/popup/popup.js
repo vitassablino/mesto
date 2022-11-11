@@ -8,6 +8,7 @@ let inputName = document.getElementById('name');
 let name = document.querySelector(".profile__name");
 let inputDesription = document.getElementById('description');
 let description = document.querySelector(".profile__description");
+let likes = document.querySelectorAll(".elements__like-button");
 
 
 
@@ -19,10 +20,6 @@ editButton.addEventListener("click", function (open) {
   popup.classList.add("popup_active");  
   inputName.value = name.innerText;
   inputDesription.value = description.innerText;
-
-  console.log("Нажата Edit");
-  console.log(inputName.value);
-  console.log(inputDesription.value);
 });
 
 closeButton.addEventListener("click", function (close) {
@@ -31,8 +28,6 @@ closeButton.addEventListener("click", function (close) {
   background.classList.remove("popup__background_active");   
   popup.classList.remove("popup_active");  
   popup.classList.add("popup_inactive");
-  
-  console.log("Нажата Close"); 
 });
 
 saveButton.addEventListener("click", function (save) {
@@ -44,6 +39,12 @@ saveButton.addEventListener("click", function (save) {
   
   popup.classList.remove("popup_active");  
   popup.classList.add("popup_inactive");
+});
 
-  console.log("Нажата Save"); 
-})
+likes.forEach((button) => {
+  button.addEventListener("click", function (like) {
+    like.preventDefault();
+    button.classList.toggle("elements__like-button_active");
+    button.classList.toggle("elements__like-button_inactive");
+  })
+});
