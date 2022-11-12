@@ -1,0 +1,9 @@
+.popup-container_status_active {
+  pointer-events: all;
+}
+
+.popup-container_status_active::after {
+  content: " ";
+  pointer-events: all;
+  opacity: 0.5;
+}

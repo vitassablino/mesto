@@ -1,6 +1,0 @@
-.popup__background_active {
-  pointer-events: all;
-  /* visibility: visible; */
-  opacity: 0.5;
-  /* transition: opacity 3s ease; */
-}

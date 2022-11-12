@@ -1,0 +1,18 @@
+.popup-container {
+  transition: opacity 1s ease;
+  z-index: 9;
+}
+
+.popup-container::before {
+  position: fixed;
+  content: " ";
+  background-color: black;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  opacity: 0.5;
+  cursor: pointer;
+  z-index: 10;
+}

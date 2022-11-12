@@ -1,5 +1,0 @@
-.elements__image {
-  max-width: 100%;
-  height: calc(width);
-  object-fit: cover;
-}
