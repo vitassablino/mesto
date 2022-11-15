@@ -1,0 +1,4 @@
+.popup-container_inactive {
+  opacity: 0;
+  pointer-events: none;
+}
