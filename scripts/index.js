@@ -22,7 +22,7 @@ closeButton.addEventListener("click", function (close) {
 });
 
 popupForm.addEventListener("submit", function (save) {
-  save.preventDefault(); // без этой функции при нажатии на кнопку  страница перезагружается
+  save.preventDefault(); 
   name.textContent = inputName.value;
   description.textContent = inputDesсription.value;
   background.classList.add("popup-container_inactive");
@@ -42,3 +42,4 @@ document.addEventListener("click", function (close) {
     background.classList.add("popup-container_inactive");
   }
 }); */
+
