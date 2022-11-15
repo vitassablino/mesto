@@ -28,7 +28,7 @@ popupForm.addEventListener("submit", function (save) {
   background.classList.add("popup-container_inactive");
 });
 
-likes.forEach((button) => {
+/* likes.forEach((button) => {
   button.addEventListener("click", function (like) {
     button.classList.toggle("element__like-button_active");
   });
@@ -41,4 +41,4 @@ document.addEventListener("click", function (close) {
   if (!clickEdit && !clickPopup) {
     background.classList.add("popup-container_inactive");
   }
-});
+}); */
