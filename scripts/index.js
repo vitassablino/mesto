@@ -51,6 +51,8 @@ function addElement(name, link) {
   elements.prepend(element);
 }
 
+/* function deleteElement(); */
+
 function openPopup(popup, form) {
   popup.classList.remove("popup-container_inactive");
   form.style.transform = "scale(1)";
@@ -119,6 +121,9 @@ elements.addEventListener("click", function (e) {
   if (e.target.classList.contains("element__like-button")) {
     e.target.classList.toggle("element__like-button_active");
   }
+  if (e.target.classList.contains("element__delete")) {
+    e.target.closest(".element").remove();
+  }
 });
 
 /* Закрытие попапа по клику вне окна*/
@@ -143,5 +148,12 @@ addCardButton.addEventListener("click", () => {
 addElement(
   "Байкал",
   "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
+);
+ */
+
+/* console.log(
+  (document
+    .querySelector(".element__delete")
+    .closest(".element").style.display = "none")
 );
  */
