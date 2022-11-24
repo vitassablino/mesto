@@ -1,0 +1,21 @@
+.image-figure__close-button {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  display: flex;
+  top: -8px;
+  right: 32px;
+  transform: translate(100%, -100%);
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.6s linear;
+  border: 0;
+  background-image: url("../../../images/Close-Icon.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.image-figure__close-button:hover {
+  opacity: 0.6;
+}

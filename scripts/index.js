@@ -3,7 +3,6 @@ const popupProfile = document.querySelector("#popup-form-profile");
 const popupCard = document.querySelector("#popup-form-card");
 const closeButton = document.querySelector(".popup-container__close-button");
 const editBackground = document.querySelector("#edit-popup-container");
-const imageBackground = document.querySelector("#image-popup-container");
 const saveButton = document.querySelector(".popup__save-button");
 const inputName = document.getElementById("name");
 const profileName = document.querySelector(".profile__name");
@@ -53,14 +52,16 @@ function addElement(name, link) {
 }
 
 function openPopup(popup, form) {
-  popup.classList.remove("popup-container_inactive");
+  let popupName = popup.className;
+  console.log(popup.className.split(' ')[0] + "_inactive");
+  popup.classList.remove(popup.className.split(' ')[0] + "_inactive");
   form.style.transform = "scale(1)";
   form.style.display = "flex";
 }
 
 function closePopup(popup) {
   setTimeout(function () {
-    popup.classList.add("popup-container_inactive");
+    popup.classList.add(popup.className.split(' ')[0] + "_inactive");
   }, 600);
   popupProfile.style.transform = "scale(0)";
   setTimeout(function () {
@@ -71,6 +72,7 @@ function closePopup(popup) {
     popupCard.style.display = "none";
   }, 600);
 }
+
 
 initialCards.forEach((element) => {
   addElement(element.name, element.link);
@@ -114,8 +116,8 @@ likes.forEach((button) => {
   });
 }); */
 
-/* Метод ниже реализует "лайки" и "удаление" путём отслеживания, на какой 
-таргет был совершён клик */
+/* Метод ниже реализует "лайки" и "удаление", а также открытие изображения
+ путём отслеживания, на какой таргет был совершён клик */
 elements.addEventListener("click", function (e) {
   if (e.target.classList.contains("element__like-button")) {
     e.target.classList.toggle("element__like-button_active");
@@ -126,12 +128,12 @@ elements.addEventListener("click", function (e) {
   }
 
   if (e.target.classList.contains("element__image")) {
-    openPopup(imageBackground);
+
   }
 });
 
 /* Закрытие попапа по клику вне окна*/
-document.addEventListener("click", function (close) {
+/* document.addEventListener("click", function (close) {
   const clickPopup = close.composedPath().includes(popupContainer);
   const clickEdit = close.composedPath().includes(editButton);
   const clickPlus = close.composedPath().includes(addCardButton);
@@ -140,7 +142,7 @@ document.addEventListener("click", function (close) {
     closePopup(editBackground);
   }
 });
-
+ */
 addCardButton.addEventListener("click", () => {
   openPopup(editBackground, popupCard);
 });
@@ -151,3 +153,4 @@ addCardButton.addEventListener("click", () => {
     .closest(".element").style.display = "none")
 );
  */
+
