@@ -2,7 +2,8 @@ const editButton = document.querySelector(".profile__edit-button");
 const popupProfile = document.querySelector("#popup-form-profile");
 const popupCard = document.querySelector("#popup-form-card");
 const closeButton = document.querySelector(".popup-container__close-button");
-const background = document.querySelector(".popup-container");
+const editBackground = document.querySelector("#edit-popup-container");
+const imageBackground = document.querySelector("#image-popup-container");
 const saveButton = document.querySelector(".popup__save-button");
 const inputName = document.getElementById("name");
 const profileName = document.querySelector(".profile__name");
@@ -51,8 +52,6 @@ function addElement(name, link) {
   elements.prepend(element);
 }
 
-/* function deleteElement(); */
-
 function openPopup(popup, form) {
   popup.classList.remove("popup-container_inactive");
   form.style.transform = "scale(1)";
@@ -78,20 +77,20 @@ initialCards.forEach((element) => {
 });
 
 editButton.addEventListener("click", () => {
-  openPopup(background, popupProfile);
+  openPopup(editBackground, popupProfile);
   inputName.value = profileName.textContent;
   inputDesсription.value = description.textContent;
 });
 
 closeButton.addEventListener("click", () => {
-  closePopup(background);
+  closePopup(editBackground);
 });
 
 popupProfile.addEventListener("submit", function (save) {
   save.preventDefault();
   profileName.textContent = inputName.value;
   description.textContent = inputDesсription.value;
-  closePopup(background);
+  closePopup(editBackground);
 });
 
 popupCard.addEventListener("submit", function (create) {
@@ -102,7 +101,7 @@ popupCard.addEventListener("submit", function (create) {
   if (cardName !== "" && cardLink !== "") {
     addElement(cardName, cardLink);
   }
-  closePopup(background);
+  closePopup(editBackground);
 
   inputCardName.value = "";
   inputCardLink.value = "";
@@ -115,14 +114,19 @@ likes.forEach((button) => {
   });
 }); */
 
-/* Метод ниже реализует "лайки" путём отслеживания, на какой 
+/* Метод ниже реализует "лайки" и "удаление" путём отслеживания, на какой 
 таргет был совершён клик */
 elements.addEventListener("click", function (e) {
   if (e.target.classList.contains("element__like-button")) {
     e.target.classList.toggle("element__like-button_active");
   }
+
   if (e.target.classList.contains("element__delete")) {
     e.target.closest(".element").remove();
+  }
+
+  if (e.target.classList.contains("element__image")) {
+    openPopup(imageBackground);
   }
 });
 
@@ -133,23 +137,13 @@ document.addEventListener("click", function (close) {
   const clickPlus = close.composedPath().includes(addCardButton);
 
   if (!clickEdit && !clickPopup && !clickPlus) {
-    closePopup(background);
+    closePopup(editBackground);
   }
 });
 
 addCardButton.addEventListener("click", () => {
-  openPopup(background, popupCard);
+  openPopup(editBackground, popupCard);
 });
-
-/* addElement(
-  "Байкал",
-  "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
-);
-addElement(
-  "Байкал",
-  "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg"
-);
- */
 
 /* console.log(
   (document
