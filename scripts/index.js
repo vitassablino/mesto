@@ -1,8 +1,10 @@
 const editButton = document.querySelector(".profile__edit-button");
 const popupProfile = document.querySelector("#popup-form-profile");
+const imageForm = document.querySelector(".image-figure");
 const popupCard = document.querySelector("#popup-form-card");
 const closeButton = document.querySelector(".popup-container__close-button");
 const editBackground = document.querySelector("#edit-popup-container");
+const imageBackground = document.querySelector(".image-container");
 const saveButton = document.querySelector(".popup__save-button");
 const inputName = document.getElementById("name");
 const profileName = document.querySelector(".profile__name");
@@ -13,6 +15,9 @@ const elements = document.querySelector(".elements");
 const addCardButton = document.querySelector(".profile__add-button");
 const inputCardName = document.querySelector("#cardName");
 const inputCardLink = document.querySelector("#cardLink");
+const closeFigure = document.querySelector(".image-figure__close-button");
+const bigImage = document.querySelector(".image-figure__big-image");
+const bigImageCaption = document.querySelector(".image-figure__figcaption");
 const initialCards = [
   {
     name: "Архыз",
@@ -52,16 +57,14 @@ function addElement(name, link) {
 }
 
 function openPopup(popup, form) {
-  let popupName = popup.className;
-  console.log(popup.className.split(' ')[0] + "_inactive");
-  popup.classList.remove(popup.className.split(' ')[0] + "_inactive");
+  popup.classList.remove(popup.className.split(" ")[0] + "_inactive");
   form.style.transform = "scale(1)";
   form.style.display = "flex";
 }
 
 function closePopup(popup) {
   setTimeout(function () {
-    popup.classList.add(popup.className.split(' ')[0] + "_inactive");
+    popup.classList.add(popup.className.split(" ")[0] + "_inactive");
   }, 600);
   popupProfile.style.transform = "scale(0)";
   setTimeout(function () {
@@ -71,8 +74,8 @@ function closePopup(popup) {
   setTimeout(function () {
     popupCard.style.display = "none";
   }, 600);
+  imageForm.style.transform = "scale(0)";
 }
-
 
 initialCards.forEach((element) => {
   addElement(element.name, element.link);
@@ -88,6 +91,10 @@ closeButton.addEventListener("click", () => {
   closePopup(editBackground);
 });
 
+closeFigure.addEventListener("click", () => {
+  closePopup(imageBackground);
+});
+
 popupProfile.addEventListener("submit", function (save) {
   save.preventDefault();
   profileName.textContent = inputName.value;
@@ -100,7 +107,7 @@ popupCard.addEventListener("submit", function (create) {
   const cardName = inputCardName.value;
   const cardLink = inputCardLink.value;
 
-  if (cardName !== "" && cardLink !== "") {
+  if (cardName !== "" || cardLink !== "") {
     addElement(cardName, cardLink);
   }
   closePopup(editBackground);
@@ -128,29 +135,29 @@ elements.addEventListener("click", function (e) {
   }
 
   if (e.target.classList.contains("element__image")) {
-
+    openPopup(imageBackground, imageForm);
+    const link = e.target.getAttribute("src");
+    const figcaption = e.target
+      .closest(".element")
+      .querySelector(".element__label").textContent;
+    bigImage.setAttribute("src", link);
+    bigImageCaption.textContent = figcaption;
   }
 });
 
 /* Закрытие попапа по клику вне окна*/
-/* document.addEventListener("click", function (close) {
+document.addEventListener("click", function (close) {
   const clickPopup = close.composedPath().includes(popupContainer);
   const clickEdit = close.composedPath().includes(editButton);
   const clickPlus = close.composedPath().includes(addCardButton);
-
-  if (!clickEdit && !clickPopup && !clickPlus) {
+  const clickBg = close.composedPath().includes(elements);
+  const clickImageForm = close.composedPath().includes(imageForm);
+  if (!clickEdit && !clickPopup && !clickPlus && !clickBg && !clickImageForm) {
     closePopup(editBackground);
+    closePopup(imageBackground);
   }
 });
- */
+
 addCardButton.addEventListener("click", () => {
   openPopup(editBackground, popupCard);
 });
-
-/* console.log(
-  (document
-    .querySelector(".element__delete")
-    .closest(".element").style.display = "none")
-);
- */
-
