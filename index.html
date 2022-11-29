@@ -36,15 +36,12 @@
         <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
       </footer>
 
-      <div
-        class="popup-container popup-container_inactive"
-        id="edit-popup-container"
-      >
-        <div class="popup-container__form">
-          <form class="popup" name="edit-popup" id="popup-form-profile">
-            <h3 class="popup__header">Редактировать профиль</h3>
+      <div class="popup popup_inactive" id="edit-popup">
+        <div class="popup__form">
+          <form class="popup-form" name="edit-popup" id="popup-form-profile">
+            <h3 class="popup-form__header">Редактировать профиль</h3>
             <input
-              class="popup__input"
+              class="popup-form__input"
               type="text"
               name="name"
               autocomplete="off"
@@ -52,20 +49,27 @@
               id="name"
             />
             <input
-              class="popup__input"
+              class="popup-form__input"
               type="text"
               name="description"
               autocomplete="off"
               placeholder="Описание"
               id="description"
             />
-            <button class="popup__save-button" type="submit">Сохранить</button>
+            <button class="popup-form__save-button" type="submit">
+              Сохранить
+            </button>
           </form>
+          <button class="popup__close-button" type="button"></button>
+        </div>
+      </div>
 
-          <form class="popup" name="card-popup" id="popup-form-card">
-            <h3 class="popup__header">Новое место</h3>
+      <div class="popup popup_inactive" id="card-popup">
+        <div class="popup__form">
+          <form class="popup-form" name="card-popup" id="popup-form-card">
+            <h3 class="popup-form__header">Новое место</h3>
             <input
-              class="popup__input"
+              class="popup-form__input"
               type="text"
               name="cardName"
               autocomplete="off"
@@ -73,29 +77,33 @@
               id="cardName"
             />
             <input
-              class="popup__input"
+              class="popup-form__input"
               type="text"
               name="cardLink"
               autocomplete="off"
               placeholder="Ссылка на картинку"
               id="cardLink"
             />
-            <button class="popup__save-button" type="submit" id="create-card">
+            <button
+              class="popup-form__save-button"
+              type="submit"
+              id="create-card"
+            >
               Создать
             </button>
           </form>
-          <button class="popup-container__close-button" type="button"></button>
+          <button class="popup__close-button" type="button"></button>
         </div>
       </div>
     </div>
 
-    <div class="image-container image-container_inactive">
-      <div class="image-container__figure-position" id="figure-position">
+    <div class="popup popup_inactive image-container" id="image-container">
+      <div class="popup__figure-position" id="figure-position">
         <figure class="image-figure">
           <img alt="Изображение" class="image-figure__big-image" />
           <figcaption class="image-figure__figcaption"></figcaption>
-          <button class="image-figure__close-button" type="button"></button>
         </figure>
+        <button class="popup__close-button" type="button"></button>
       </div>
     </div>
 

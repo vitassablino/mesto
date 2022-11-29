@@ -1,4 +1,4 @@
-.popup__input {
+.popup-form__input {
   max-width: 100%;
   min-height: 27px;
   border-top: 0;
@@ -9,6 +9,6 @@
   padding: 0 0 10px;
 }
 
-.popup__input:first-of-type {
+.popup-form__input:first-of-type {
   margin-bottom: 30px;
 }
