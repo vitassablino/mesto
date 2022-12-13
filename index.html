@@ -38,7 +38,12 @@
 
       <div class="popup popup_inactive" id="edit-popup">
         <div class="popup__form">
-          <form class="popup-form" name="edit-popup" id="popup-form-profile">
+          <form
+            class="popup-form"
+            name="edit-popup"
+            id="popup-form-profile"
+            novalidate
+          >
             <h3 class="popup-form__header">Редактировать профиль</h3>
             <input
               class="popup-form__input"
@@ -47,7 +52,11 @@
               autocomplete="off"
               placeholder="Имя"
               id="name"
+              minlength="2"
+              maxlength="40"
+              required
             />
+            <span class="name-error popup-form__input_error"></span>
             <input
               class="popup-form__input"
               type="text"
@@ -55,7 +64,11 @@
               autocomplete="off"
               placeholder="Описание"
               id="description"
+              minlength="2"
+              maxlength="40"
+              required
             />
+            <span class="description-error popup-form__input_error"></span>
             <button class="popup-form__save-button" type="submit">
               Сохранить
             </button>
@@ -66,7 +79,12 @@
 
       <div class="popup popup_inactive" id="card-popup">
         <div class="popup__form">
-          <form class="popup-form" name="card-popup" id="popup-form-card">
+          <form
+            class="popup-form"
+            name="card-popup"
+            id="popup-form-card"
+            novalidate
+          >
             <h3 class="popup-form__header">Новое место</h3>
             <input
               class="popup-form__input"
@@ -75,15 +93,21 @@
               autocomplete="off"
               placeholder="Название"
               id="cardName"
+              minlength="2"
+              maxlength="30"
+              required
             />
+            <span class="cardName-error popup-form__input_error"></span>
             <input
               class="popup-form__input"
-              type="text"
+              type="url"
               name="cardLink"
               autocomplete="off"
               placeholder="Ссылка на картинку"
               id="cardLink"
+              required
             />
+            <span class="cardLink-error popup-form__input_error"></span>
             <button
               class="popup-form__save-button"
               type="submit"
@@ -121,5 +145,6 @@
     </template>
 
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>

@@ -5,8 +5,8 @@ const popupCard = document.querySelector("#popup-form-card");
 const closeButtons = document.querySelectorAll(".popup__close-button");
 const editBackground = document.querySelector("#edit-popup");
 const cardBackground = document.querySelector("#card-popup");
-const popup = document.querySelectorAll(".popup");
-const popups = document.querySelectorAll('.popup')
+/* const popup = document.querySelectorAll(".popup"); */
+const popups = document.querySelectorAll(".popup");
 const imagePopup = document.querySelector("#image-container");
 const saveButton = document.querySelector(".popup__save-button");
 const inputName = document.getElementById("name");
@@ -50,12 +50,14 @@ const initialCards = [
 ];
 
 /* Блок описания функций */
-function createElement (name, link) {
+
+/*Создание карточки*/
+function createElement(name, link) {
   const element = elementTemplate.querySelector(".element").cloneNode(true);
   const like = element.querySelector(".element__like-button");
   const deleteButton = element.querySelector(".element__delete");
   const image = element.querySelector(".element__image");
-  const label =  element.querySelector(".element__label")
+  const label = element.querySelector(".element__label");
   label.textContent = name;
   image.setAttribute("src", link);
   image.setAttribute("alt", "Фото");
@@ -69,53 +71,68 @@ function createElement (name, link) {
   });
 
   image.addEventListener("click", () => {
-    const alt = element.getAttribute('alt');
-    openPopup(imagePopup);    
+    const alt = element.getAttribute("alt");
+    openPopup(imagePopup);
     bigImage.setAttribute("src", link);
     bigImage.setAttribute("alt", alt);
     bigImageCaption.textContent = label.textContent;
-  })
+  });
 
-  return element
-};
+  return element;
+}
 
-function addElementPrepend(name, link) {  
-  elements.prepend(createElement (name, link));
-};
+/*Добавление карточки*/
+function addElementPrepend(name, link) {
+  elements.prepend(createElement(name, link));
+}
 
+/*Открытие попапа*/
 function openPopup(popup) {
   popup.classList.remove(popup.className.split(" ")[0] + "_inactive");
-};
+}
 
+/*Закрытие попапа*/
 function closePopup(popup) {
   popup.classList.add("popup_inactive");
-};
+}
+
+/* Проверка на нажатие Esc */
+function escClosesPopup(popup) {
+  document.addEventListener("keydown", function (event) {
+    const key = event.key;
+    if (key === "Escape") {
+      closePopup(popup);
+    }
+  });
+}
 ///////////////////////////////////////////////////////
 
-
+/* Добавление стартовых карточек */
 initialCards.forEach((element) => {
   addElementPrepend(element.name, element.link);
 });
 
+/*Открытие попапа редактирования данных*/
 editButton.addEventListener("click", () => {
   openPopup(editBackground);
   inputName.value = profileName.textContent;
   inputDesсription.value = description.textContent;
 });
 
+/*Закрытие попапа при нажатии на крестик*/
 closeButtons.forEach((button) => {
-  const popup = button.closest('.popup')
+  const popup = button.closest(".popup");
   button.addEventListener("click", function () {
-closePopup(popup);
-  })
+    closePopup(popup);
+  });
 });
 
-/* Изменение информации профиля */
+/* Сохранение изменения информации профиля */
 popupProfile.addEventListener("submit", function (save) {
   save.preventDefault();
   profileName.textContent = inputName.value;
   description.textContent = inputDesсription.value;
-  closePopup(save.target.closest('.popup'));
+  closePopup(save.target.closest(".popup"));
 });
 
 /* Добавление новой карточки*/
@@ -127,69 +144,34 @@ popupCard.addEventListener("submit", function (create) {
   if (cardName !== "" || cardLink !== "") {
     addElementPrepend(cardName, cardLink);
   }
-  closePopup(create.target.closest('.popup'));
+  closePopup(create.target.closest(".popup"));
   create.target.reset();
-  
 });
 
 /* Закрытие попапа по клику вне окна*/
 popups.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-    if (evt.target.classList.contains('popup')) {
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("popup")) {
       closePopup(popup);
     }
-  })
+  });
+  escClosesPopup(popup);
 });
 
+/* Открытие изображения */
 addCardButton.addEventListener("click", () => {
   openPopup(cardBackground);
 });
 
-
-/* Метод ниже удобен в тех сдучаях, когда коллекция требуемых 
-элементов собирается из объявленных в html объектов
-likes.forEach((button) => {
-  button.addEventListener("click", function (like) {
-    button.classList.toggle("element__like-button_active");
+/*Закрытие попапа по нажатию Esc*/
+/* popups.forEach((popup) => {
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      closePopup(popup);
+    }
   });
 }); */
-
-/* Метод ниже реализует "лайки" и "удаление", а также открытие изображения
- путём отслеживания, на какой таргет был совершён клик */
-/* elements.addEventListener("click", function (e) {
-  if (e.target.classList.contains("element__like-button")) {
-    e.target.classList.toggle("element__like-button_active");
-  }
-
-  if (e.target.classList.contains("element__delete")) {
-    e.target.closest(".element").remove();
-  }
-
-  if (e.target.classList.contains("element__image")) {
-    openPopup(imagePopup);
-    const link = e.target.getAttribute("src");
-    const figcaption = e.target
-      .closest(".element")
-      .querySelector(".element__label").textContent;
-      const alt = e.target.getAttribute('alt');
-    bigImage.setAttribute("src", link);
-    bigImage.setAttribute("alt", alt);
-    bigImageCaption.textContent = figcaption;
-  }
-}); */
-
-/* Закрытие попапа по клику вне окна*/
-/* document.addEventListener("click", function (close) {
-  const clickPopup = close.composedPath().includes(popupContainer);
-  const clickEdit = close.composedPath().includes(editButton);
-  const clickPlus = close.composedPath().includes(addCardButton);
-  const clickBg = close.composedPath().includes(elements);
-  const clickImageForm = close.composedPath().includes(imageForm);
-  if (!clickEdit && !clickPopup && !clickPlus && !clickBg && !clickImageForm) {
-    closePopup(cardBackground);
-    closePopup(imageBackground);
-  }
-}); */
+/* escPressed(); */
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 /* ToDoList /*
