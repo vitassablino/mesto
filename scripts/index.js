@@ -1,10 +1,10 @@
 const editButton = document.querySelector(".profile__edit-button");
-const popupProfile = document.querySelector("#popup-form-profile");
+const formEditProfile = document.querySelector("#popup-form-profile");
 const imageForm = document.querySelector(".image-figure");
-const popupCard = document.querySelector("#popup-form-card");
+const formAddCard = document.querySelector("#popup-form-card");
 const closeButtons = document.querySelectorAll(".popup__close-button");
-const editBackground = document.querySelector("#edit-popup");
-const cardBackground = document.querySelector("#card-popup");
+const popupEditProfile = document.querySelector("#edit-popup");
+const popupAddCard = document.querySelector("#card-popup");
 const popups = document.querySelectorAll(".popup");
 const imagePopup = document.querySelector("#image-container");
 const saveButton = document.querySelector(".popup__save-button");
@@ -59,7 +59,7 @@ function createElement(name, link) {
   const label = element.querySelector(".element__label");
   label.textContent = name;
   image.setAttribute("src", link);
-  image.setAttribute("alt", "Фото");
+  image.setAttribute("alt", name);
 
   like.addEventListener("click", () => {
     like.classList.toggle("element__like-button_active");
@@ -70,10 +70,9 @@ function createElement(name, link) {
   });
 
   image.addEventListener("click", () => {
-    const alt = element.getAttribute("alt");
     openPopup(imagePopup);
     bigImage.setAttribute("src", link);
-    bigImage.setAttribute("alt", alt);
+    bigImage.setAttribute("alt", name);
     bigImageCaption.textContent = label.textContent;
   });
 
@@ -87,7 +86,13 @@ function addElementPrepend(name, link) {
 
 /*Открытие попапа*/
 function openPopup(popup) {
-  popup.classList.remove(popup.className.split(" ")[0] + "_inactive");
+  popup.classList.remove("popup_inactive");
+  document.addEventListener("keydown", (evt) => {
+    const esc = escPressed(evt);
+    if (esc) {
+      closePopup(popup);
+    }
+  });
 }
 
 /*Закрытие попапа*/
@@ -96,14 +101,16 @@ function closePopup(popup) {
 }
 
 /* Проверка на нажатие Esc */
-function escClosesPopup(popup) {
-  document.addEventListener("keydown", function (event) {
-    const key = event.key;
-    if (key === "Escape") {
-      closePopup(popup);
-    }
-  });
-}
+const escPressed = (event) => {
+  const key = event.key;
+  const res = false;
+  if (key === "Escape") {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 ///////////////////////////////////////////////////////
 
 /* Добавление стартовых карточек */
@@ -113,7 +120,7 @@ initialCards.forEach((element) => {
 
 /*Открытие попапа редактирования данных*/
 editButton.addEventListener("click", () => {
-  openPopup(editBackground);
+  openPopup(popupEditProfile);
   inputName.value = profileName.textContent;
   inputDesсription.value = description.textContent;
 });
@@ -127,24 +134,24 @@ closeButtons.forEach((button) => {
 });
 
 /* Сохранение изменения информации профиля */
-popupProfile.addEventListener("submit", function (save) {
-  save.preventDefault();
+formEditProfile.addEventListener("submit", function (evt) {
+  evt.preventDefault();
   profileName.textContent = inputName.value;
   description.textContent = inputDesсription.value;
-  closePopup(save.target.closest(".popup"));
+  closePopup(evt.target.closest(".popup"));
 });
 
 /* Добавление новой карточки*/
-popupCard.addEventListener("submit", function (create) {
-  create.preventDefault();
+formAddCard.addEventListener("submit", function (evt) {
+  evt.preventDefault();
   const cardName = inputCardName.value;
   const cardLink = inputCardLink.value;
 
   if (cardName !== "" || cardLink !== "") {
     addElementPrepend(cardName, cardLink);
   }
-  closePopup(create.target.closest(".popup"));
-  create.target.reset();
+  closePopup(evt.target.closest(".popup"));
+  evt.target.reset();
 });
 
 /* Закрытие попапа по клику вне окна*/
@@ -154,23 +161,12 @@ popups.forEach((popup) => {
       closePopup(popup);
     }
   });
-  escClosesPopup(popup);
 });
 
 /* Открытие изображения */
 addCardButton.addEventListener("click", () => {
-  openPopup(cardBackground);
+  openPopup(popupAddCard);
 });
-
-/*Закрытие попапа по нажатию Esc*/
-/* popups.forEach((popup) => {
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-      closePopup(popup);
-    }
-  });
-}); */
-/* escPressed(); */
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 /* ToDoList /*
