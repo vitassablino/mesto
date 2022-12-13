@@ -5,7 +5,6 @@ const popupCard = document.querySelector("#popup-form-card");
 const closeButtons = document.querySelectorAll(".popup__close-button");
 const editBackground = document.querySelector("#edit-popup");
 const cardBackground = document.querySelector("#card-popup");
-/* const popup = document.querySelectorAll(".popup"); */
 const popups = document.querySelectorAll(".popup");
 const imagePopup = document.querySelector("#image-container");
 const saveButton = document.querySelector(".popup__save-button");

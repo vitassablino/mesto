@@ -4,20 +4,17 @@ const config = {
   submitButtonSelector: ".popup-form__save-button",
   inactiveButtonClass: "popup-form__save-button_disabled",
   inputErrorClass: "popup-form__input_wrong",
-  //errorClass: "popup__error_visible",
 };
 
 const checkInputValidity = (input, config) => {
-  const error = document.querySelector(`.${input.id}-error`);
+  const error = document.querySelector(`#${input.id}-error`);
 
   if (input.validity.valid) {
     error.textContent = "";
     input.classList.remove(config.inputErrorClass);
-    console.log(input.validationMessage);
   } else {
     error.textContent = input.validationMessage;
     input.classList.add(config.inputErrorClass);
-    console.log(input.validationMessage);
   }
 };
 
