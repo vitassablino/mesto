@@ -84,32 +84,26 @@ function addElementPrepend(name, link) {
   elements.prepend(createElement(name, link));
 }
 
+/* Закрытие по нажатию Esc */
+const closeByEsc = (event) => {
+  const key = event.key;
+  if (key === "Escape") {
+    closePopup();
+  }
+};
+
 /*Открытие попапа*/
 function openPopup(popup) {
-  popup.classList.remove("popup_inactive");
-  document.addEventListener("keydown", (evt) => {
-    const esc = escPressed(evt);
-    if (esc) {
-      closePopup(popup);
-    }
-  });
+  popup.classList.add("popup_active");
+  document.addEventListener("keydown", closeByEsc);
 }
 
 /*Закрытие попапа*/
-function closePopup(popup) {
-  popup.classList.add("popup_inactive");
+function closePopup() {
+  const openedPopup = document.querySelector(".popup_active");
+  openedPopup.classList.remove("popup_active");
+  document.removeEventListener("keydown", closeByEsc);
 }
-
-/* Проверка на нажатие Esc */
-const escPressed = (event) => {
-  const key = event.key;
-  const res = false;
-  if (key === "Escape") {
-    return true;
-  } else {
-    return false;
-  }
-};
 
 ///////////////////////////////////////////////////////
 
@@ -127,9 +121,8 @@ editButton.addEventListener("click", () => {
 
 /*Закрытие попапа при нажатии на крестик*/
 closeButtons.forEach((button) => {
-  const popup = button.closest(".popup");
   button.addEventListener("click", function () {
-    closePopup(popup);
+    closePopup();
   });
 });
 
@@ -138,7 +131,7 @@ formEditProfile.addEventListener("submit", function (evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   description.textContent = inputDesсription.value;
-  closePopup(evt.target.closest(".popup"));
+  closePopup();
 });
 
 /* Добавление новой карточки*/
@@ -147,10 +140,8 @@ formAddCard.addEventListener("submit", function (evt) {
   const cardName = inputCardName.value;
   const cardLink = inputCardLink.value;
 
-  if (cardName !== "" || cardLink !== "") {
-    addElementPrepend(cardName, cardLink);
-  }
-  closePopup(evt.target.closest(".popup"));
+  addElementPrepend(cardName, cardLink);
+  closePopup();
   evt.target.reset();
 });
 
@@ -158,7 +149,7 @@ formAddCard.addEventListener("submit", function (evt) {
 popups.forEach((popup) => {
   popup.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup")) {
-      closePopup(popup);
+      closePopup();
     }
   });
 });

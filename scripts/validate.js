@@ -6,15 +6,23 @@ const config = {
   inputErrorClass: "popup-form__input_wrong",
 };
 
+const hideInputError = (error, input) => {
+  error.textContent = "";
+  input.classList.remove(config.inputErrorClass);
+};
+
+const showInputError = (error, input) => {
+  error.textContent = input.validationMessage;
+  input.classList.add(config.inputErrorClass);
+};
+
 const checkInputValidity = (input, config) => {
   const error = document.querySelector(`#${input.id}-error`);
 
   if (input.validity.valid) {
-    error.textContent = "";
-    input.classList.remove(config.inputErrorClass);
+    hideInputError(error, input);
   } else {
-    error.textContent = input.validationMessage;
-    input.classList.add(config.inputErrorClass);
+    showInputError(error, input);
   }
 };
 
