@@ -88,7 +88,8 @@ function addElementPrepend(name, link) {
 const closeByEsc = (event) => {
   const key = event.key;
   if (key === "Escape") {
-    closePopup();
+    const popup = document.querySelector(".popup_active");
+    closePopup(popup);
   }
 };
 
@@ -99,9 +100,8 @@ function openPopup(popup) {
 }
 
 /*Закрытие попапа*/
-function closePopup() {
-  const openedPopup = document.querySelector(".popup_active");
-  openedPopup.classList.remove("popup_active");
+function closePopup(popup) {
+  popup.classList.remove("popup_active");
   document.removeEventListener("keydown", closeByEsc);
 }
 
@@ -121,35 +121,41 @@ editButton.addEventListener("click", () => {
 
 /*Закрытие попапа при нажатии на крестик*/
 closeButtons.forEach((button) => {
+   const popup = button.closest(".popup"); 
   button.addEventListener("click", function () {
-    closePopup();
+    closePopup(popup);
   });
 });
 
 /* Сохранение изменения информации профиля */
 formEditProfile.addEventListener("submit", function (evt) {
   evt.preventDefault();
+  const openedPopup =  document.querySelector(".popup_active");
   profileName.textContent = inputName.value;
   description.textContent = inputDesсription.value;
-  closePopup();
+  closePopup(openedPopup);
 });
 
 /* Добавление новой карточки*/
 formAddCard.addEventListener("submit", function (evt) {
   evt.preventDefault();
+  const openedPopup =  document.querySelector(".popup_active");
   const cardName = inputCardName.value;
   const cardLink = inputCardLink.value;
+  const saveCardBtn = formAddCard.querySelector('.popup-form__save-button')
 
+  saveCardBtn.classList.add("popup-form__save-button_disabled");
+  saveCardBtn.disabled = "disabled";
   addElementPrepend(cardName, cardLink);
-  closePopup();
-  evt.target.reset();
+  closePopup(openedPopup);
+  formAddCard.reset();
 });
 
 /* Закрытие попапа по клику вне окна*/
 popups.forEach((popup) => {
   popup.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup")) {
-      closePopup();
+      closePopup(popup);
     }
   });
 });
