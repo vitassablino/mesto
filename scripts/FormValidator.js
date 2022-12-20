@@ -1,57 +1,58 @@
 export class FormValidator {
-  constructor(data, elementToValidate) {
+  constructor(data, formToValidate) {
     this.formSelector = data.formSelector;
     this.inputSelector = data.inputSelector;
     this.submitButtonSelector = data.submitButtonSelector;
     this.inactiveButtonClass = data.inactiveButtonClass;
     this.inputErrorClass = data.inputErrorClass;
-    this.input = elementToValidate;
+    this.form = formToValidate;
   }
 
-  #hideInputError = (error, input) => {
+  /* Убирание ошибки ввода */
+  #hideInputError (error, input) {
     error.textContent = "";
     input.classList.remove(this.inputErrorClass);
   };
 
-  #showInputError = (error, input) => {
+
+  /* Показ ошибки ввода */
+  #showInputError (error, input)  {
     error.textContent = input.validationMessage;
     input.classList.add(this.inputErrorClass);
   };
 
-  #checkInputValidity = (input) => {
+  /* Проверка правильности ввода */
+  #checkInputValidity (input) {
     const error = document.querySelector(`#${input.id}-error`);
 
     if (input.validity.valid) {
-      hideInputError(error, this.input);
+      this.#hideInputError(error, input);
     } else {
-      showInputError(error, this.input);
+      this.#showInputError(error, input);
     }
   };
 
-  #toggleButton = (inputs, button, config) => {
+  /* Переключение состояния кноаки сабмита*/
+  #toggleButton (inputs, button) {
     const isFormValid = inputs.every((input) => input.validity.valid);
 
     if (isFormValid) {
-      button.classList.remove(config.inactiveButtonClass);
+      button.classList.remove(this.inactiveButtonClass);
       button.disabled = "";
     } else {
-      button.classList.add(config.inactiveButtonClass);
+      button.classList.add(this.inactiveButtonClass);
       button.disabled = "disabled";
     }
   };
 
-  enableValidation(elem) {
-    const forms = [...document.querySelectorAll(data.formSelector)];
-
-    forms.forEach((form) => {
-      const inputs = [...form.querySelectorAll(data.inputSelector)];
-      const button = form.querySelector(data.submitButtonSelector);
-
-      inputs.forEach((input) => {
-        input.addEventListener("input", () => {
-          checkInputValidity(input, data);
-          toggleButton(inputs, button, data);
-        });
+  /* Включение валидации формы */
+  enableValidation() {
+    const inputs = [...this.form.querySelectorAll(this.inputSelector)];
+    const button = this.form.querySelector(this.submitButtonSelector);
+    inputs.forEach((input) => {
+    input.addEventListener("input", () => {
+      this.#checkInputValidity(input);
+      this.#toggleButton(inputs, button);
       });
     });
   }
