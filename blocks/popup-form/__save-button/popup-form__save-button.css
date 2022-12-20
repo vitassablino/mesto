@@ -27,7 +27,7 @@
 @media screen and (max-width: 719px) {
   .popup-form__save-button {
     min-height: 46px;
-    margin-top: 40px;
+    margin-top: 0;
     font-size: 14px;
     line-height: 17px;
   }
