@@ -5,6 +5,16 @@ const data = {
   imagePopup: document.querySelector("#image-container"),
   bigImage: document.querySelector(".image-figure__big-image"),
   bigImageCaption: document.querySelector(".image-figure__figcaption"),
+
+  openCard: function (popup, handleCloseByEsc) {
+    popup.classList.add("popup_active");
+    document.addEventListener("keydown", handleCloseByEsc);
+  },
+
+  closeCard: function (popup, handleCloseByEsc) {
+    popup.classList.remove("popup_active");
+    document.removeEventListener("keydown", handleCloseByEsc);
+  }
 };
 
 const config = {
@@ -86,7 +96,8 @@ function closePopup(popup) {
 /* Добавление стартовых карточек */
 initialCards.forEach((element) => {
   element = new Card(element.name, element.link, elementTemplate, data);
-  element.addCardPrepend(elements);
+  elements.prepend(element.createCard());
+ /*  element.addCardPrepend(elements); */
 });
 
 /*Открытие попапа редактирования данных*/
@@ -107,25 +118,21 @@ closeButtons.forEach((button) => {
 /* Сохранение изменения информации профиля */
 formEditProfile.addEventListener("submit", function (evt) {
   evt.preventDefault();
-  const openedPopup = document.querySelector(".popup_active");
   profileName.textContent = inputName.value;
   description.textContent = inputDesсription.value;
-  closePopup(openedPopup);
+  closePopup(popupEditProfile);
 });
 
 /* Добавление новой карточки*/
 formAddCard.addEventListener("submit", function (evt) {
   evt.preventDefault();
-  const openedPopup = document.querySelector(".popup_active");
   const cardName = inputCardName.value;
   const cardLink = inputCardLink.value;
-  const saveCardBtn = formAddCard.querySelector(".popup-form__save-button");
 
-  saveCardBtn.classList.add("popup-form__save-button_disabled");
-  saveCardBtn.disabled = "disabled";
   const newCard = new Card(cardName, cardLink, elementTemplate, data);
-  newCard.addCardPrepend(elements);
-  closePopup(openedPopup);
+  elements.prepend(newCard.createCard())
+ /*  newCard.addCardPrepend(elements); */
+  closePopup(popupAddCard);
   formAddCard.reset();
 });
 
@@ -153,7 +160,10 @@ formAddCardValidation.enableValidation();
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 /* ToDoList /*
-/* Анимация масштабирования при добавлении новых карточек */
+/* Анимация масштабирования при добавлении новых карточек 
+Алгоритм:
+1. Снятие координат нажатия по картинке относительно монитора (Точка А0)
+2. Анимация от (масштаб 0, центр в точке А0) до (масштаб 1, центр монитора)*/
 /* Анимация масштабирования окна папапа */
 /* Анимация при открытии изображения */
 ///////////////////////////////////////////////////////////////////////////////////////////

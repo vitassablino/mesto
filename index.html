@@ -22,11 +22,19 @@
             />
             <div class="profile__info">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <button class="profile__edit-button" type="button"></button>
+              <button
+                aria-label="Редактировать профиль"
+                class="profile__edit-button"
+                type="button"
+              ></button>
               <p class="profile__description">Исследователь океана</p>
             </div>
           </div>
-          <button class="profile__add-button" type="button"></button>
+          <button
+            aria-label="Добавить место"
+            class="profile__add-button"
+            type="button"
+          ></button>
         </section>
 
         <ul class="elements"></ul>
@@ -65,7 +73,7 @@
               placeholder="Описание"
               id="description"
               minlength="2"
-              maxlength="40"
+              maxlength="200"
               required
             />
             <span class="popup-form__input-error" id="description-error"></span>
@@ -73,7 +81,11 @@
               Сохранить
             </button>
           </form>
-          <button class="popup__close-button" type="button"></button>
+          <button
+            aria-label="Закрыть форму ввода"
+            class="popup__close-button"
+            type="button"
+          ></button>
         </div>
       </div>
 
@@ -117,7 +129,11 @@
               Создать
             </button>
           </form>
-          <button class="popup__close-button" type="button"></button>
+          <button
+            aria-label="Закрыть форму ввода"
+            class="popup__close-button"
+            type="button"
+          ></button>
         </div>
       </div>
     </div>
@@ -128,7 +144,11 @@
           <img alt="Изображение" class="image-figure__big-image" />
           <figcaption class="image-figure__figcaption"></figcaption>
         </figure>
-        <button class="popup__close-button" type="button"></button>
+        <button
+          aria-label="Закрыть изображение"
+          class="popup__close-button"
+          type="button"
+        ></button>
       </div>
     </div>
 
@@ -139,14 +159,20 @@
         </div>
         <div class="element__form">
           <h2 class="element__label"></h2>
-          <button class="element__like-button" type="button"></button>
+          <button
+            aria-label="Лайк"
+            class="element__like-button"
+            type="button"
+          ></button>
         </div>
-        <button class="element__delete" type="button"></button>
+        <button
+          aria-label="Удалить место"
+          class="element__delete"
+          type="button"
+        ></button>
       </li>
     </template>
 
     <script type="module" src="./scripts/index.js"></script>
-    <script type="module" src="./scripts/Card.js"></script>
-    <script type="module" src="./scripts/FormValidator.js"></script>
   </body>
 </html>
