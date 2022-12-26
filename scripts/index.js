@@ -1,20 +1,16 @@
 import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js"
+import { FormValidator } from "./FormValidator.js";
 
+const imagePopup = document.querySelector("#image-container");
+const bigImage = document.querySelector(".image-figure__big-image");
+const bigImageCaption = document.querySelector(".image-figure__figcaption");
 const data = {
-  imagePopup: document.querySelector("#image-container"),
-  bigImage: document.querySelector(".image-figure__big-image"),
-  bigImageCaption: document.querySelector(".image-figure__figcaption"),
-
-  openCard: function (popup, handleCloseByEsc) {
-    popup.classList.add("popup_active");
-    document.addEventListener("keydown", handleCloseByEsc);
+  handleCardClick: (name, link) => {
+    bigImage.src = link;
+    bigImage.alt = name;
+    bigImageCaption.textContent = name;
+    openPopup(imagePopup);
   },
-
-  closeCard: function (popup, handleCloseByEsc) {
-    popup.classList.remove("popup_active");
-    document.removeEventListener("keydown", handleCloseByEsc);
-  }
 };
 
 const config = {
@@ -97,7 +93,7 @@ function closePopup(popup) {
 initialCards.forEach((element) => {
   element = new Card(element.name, element.link, elementTemplate, data);
   elements.prepend(element.createCard());
- /*  element.addCardPrepend(elements); */
+  /*  element.addCardPrepend(elements); */
 });
 
 /*Открытие попапа редактирования данных*/
@@ -123,16 +119,23 @@ formEditProfile.addEventListener("submit", function (evt) {
   closePopup(popupEditProfile);
 });
 
+/* Включение Валидации форм */
+const formEditProfileValidation = new FormValidator(config, formEditProfile);
+formEditProfileValidation.enableValidation();
+
+const formAddCardValidation = new FormValidator(config, formAddCard);
+formAddCardValidation.enableValidation();
+
 /* Добавление новой карточки*/
 formAddCard.addEventListener("submit", function (evt) {
   evt.preventDefault();
   const cardName = inputCardName.value;
   const cardLink = inputCardLink.value;
-
   const newCard = new Card(cardName, cardLink, elementTemplate, data);
-  elements.prepend(newCard.createCard())
- /*  newCard.addCardPrepend(elements); */
+
+  elements.prepend(newCard.createCard());
   closePopup(popupAddCard);
+  formAddCardValidation.disableSubmitButton();
   formAddCard.reset();
 });
 
@@ -149,14 +152,6 @@ popups.forEach((popup) => {
 addCardButton.addEventListener("click", () => {
   openPopup(popupAddCard);
 });
-
-
-/* Включение Валидации форм */
-const formEditProfileValidation = new FormValidator(config, formEditProfile);
-formEditProfileValidation.enableValidation()
-
-const formAddCardValidation = new FormValidator(config, formAddCard);
-formAddCardValidation.enableValidation();
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 /* ToDoList /*
