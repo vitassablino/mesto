@@ -4,6 +4,7 @@ import { FormValidator } from "./FormValidator.js";
 const imagePopup = document.querySelector("#image-container");
 const bigImage = document.querySelector(".image-figure__big-image");
 const bigImageCaption = document.querySelector(".image-figure__figcaption");
+
 const data = {
   handleCardClick: (name, link) => {
     bigImage.src = link;

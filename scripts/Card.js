@@ -3,12 +3,7 @@ export class Card {
     this._cardName = name;
     this._cardLink = link;
     this._temlate = cardTemplate;
-    /*  this._imagePopup = data.imagePopup;
-    this._bigImage = data.bigImage;
-    this._bigImageCaption = data.bigImageCaption;
-    this._openCard = data.openCard; */
-    this._closeCard = data.closeCard;
-    this.handleCardClick = data.handleCardClick(name, link);
+    this.handleCardClick = data.handleCardClick;
   }
 
   /*Создание карточки*/
@@ -35,7 +30,9 @@ export class Card {
       this.#handleDeleteButtonClick();
     });
 
-    this._image.addEventListener("click", () => {});
+    this._image.addEventListener("click", () => {
+      this.handleCardClick(this._cardName, this._cardLink);
+    });
   }
 
   /*Обработчик нажатия на лайк */
@@ -48,14 +45,6 @@ export class Card {
     this._card.remove();
   }
 
-  /*Обработчик нажатия на изображение*/
-  #handleImageClick() {
-    this._openCard(this._imagePopup, this.#handleCloseByEsc);
-    this._bigImage.setAttribute("src", this._cardLink);
-    this._bigImage.setAttribute("alt", this._cardName);
-    this._bigImageCaption.textContent = this._label.textContent;
-  }
-
   /*Закрытие по Esc*/
   #handleCloseByEsc = (event) => {
     const key = event.key;
@@ -64,9 +53,4 @@ export class Card {
       this._closeCard(popup, this.#handleCloseByEsc);
     }
   };
-
-  /* Добавление карточки */
-  /* addCardPrepend(placeToAdd) {
-    placeToAdd.prepend(this.createCard());
-  } */
 }
