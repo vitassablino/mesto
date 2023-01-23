@@ -46,11 +46,11 @@ export class Card {
   }
 
   /*Закрытие по Esc*/
-  #handleCloseByEsc = (event) => {
+  /*  #handleCloseByEsc = (event) => {
     const key = event.key;
     if (key === "Escape") {
       const popup = document.querySelector(".popup_active");
       this._closeCard(popup, this.#handleCloseByEsc);
     }
-  };
+  }; */
 }
