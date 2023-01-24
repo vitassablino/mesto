@@ -3,6 +3,7 @@ import { FormValidator } from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
 const imagePopup = document.querySelector("#image-container");
 const bigImage = document.querySelector(".image-figure__big-image");
@@ -75,7 +76,7 @@ const startCards = {
   },
 };
 
-const popupProfile = new Popup(popupProfileSelector);
+const popupProfile = new PopupWithForm(popupProfileSelector);
 popupProfile.setEventListeners();
 const popupAddCard = new Popup(popupAddCardSelector);
 popupAddCard.setEventListeners();
@@ -92,10 +93,10 @@ popupAddCard.setEventListeners();
 }; */
 
 /*Открытие попапа*/
-function openPopup(popup) {
+/* function openPopup(popup) {
   popup.classList.add("popup_active");
   document.addEventListener("keydown", closeByEsc);
-}
+} */
 
 /*Закрытие попапа*/
 /* function closePopup(popup) {
@@ -116,8 +117,8 @@ cardsSection.startingRendering();
 /*Открытие попапа редактирования данных*/
 editButton.addEventListener("click", () => {
   popupProfile.open();
-  inputName.value = profileName.textContent;
-  inputDesсription.value = description.textContent;
+  /*   inputName.value = profileName.textContent;
+  inputDesсription.value = description.textContent */
 });
 
 /*Закрытие попапа при нажатии на крестик*/
@@ -129,12 +130,12 @@ editButton.addEventListener("click", () => {
 }); */
 
 /* Сохранение изменения информации профиля */
-formEditProfile.addEventListener("submit", function (evt) {
+/* formEditProfile.addEventListener("submit", function (evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   description.textContent = inputDesсription.value;
   popupProfile.close();
-});
+}); */
 
 /* Включение Валидации форм */
 const formEditProfileValidation = new FormValidator(config, formEditProfile);
