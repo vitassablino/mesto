@@ -4,43 +4,39 @@ export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleSubmitForm) {
     super(popupSelector);
     this._handleSubmitForm = handleSubmitForm;
-    this._profileName = document.querySelector(".profile__name");
-    this._description = document.querySelector(".profile__description");
-    this._inputName = this._popupSelector.querySelector(".input");
-    /* this._inputDesсription = this._popupSelector.getElementById("description"); */
+    this._popupForm = this._popup.querySelector(".popup-form")
+    this._inputList = this._popupForm.querySelectorAll(".popup-form__input");
   }
+
 
   /* Сбор данных с полей формы */
   _getInputValues() {
-    this._formValues = {
-      inputName,
-      inputDescription,
-    };
-    this._formValues.inputName = this._profileName.value;
-    this._formValues.inputDescription = this._description.value;
+    this._formValues = {};
+    this._inputList.forEach(input => {
+      this._formValues[input.name] = input.value
+    });
     return this._formValues;
   }
 
+
   /* Установка слушателей */
   setEventListeners() {
-    /* Закрытие по нажатию на крестик */
-    this._closeButton.addEventListener("click", this.close.bind(this));
-    /* Закрытие по клику вне окна */
-    this._popupSelector.addEventListener("mousedown", (evt) => {
-      if (evt.target.classList.contains("popup")) {
-        this.close();
-      }
-    });
+    super.setEventListeners();
+
     /* Сабмит формы */
-    this._popupSelector.addEventListener("submit", function (evt) {
+    this._popupForm.addEventListener("submit",  (evt) => {
       evt.preventDefault();
-      console.log("111");
+      /* console.log("111"); */
       this._handleSubmitForm(this._getInputValues());
+      this.close()
     });
   }
 
   /* закрытие формы */
   close() {
     super.close();
+    /* console.log(this._getInputValues());
+    console.log(this._inputList); */
+    this._popupForm.reset();
   }
 }
