@@ -4,12 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mesto</title>
-    <link rel="stylesheet" href="pages/index.css" />
+    <!-- <link rel="stylesheet" href="pages/index.css" /> -->
   </head>
   <body class="body">
     <div class="page">
       <header class="header">
-        <img src="./images/header__logo.svg" class="header__logo" alt="лого" />
+        <img
+          src="<%=require('./images/header__logo.svg')%>"
+          class="header__logo"
+          alt="лого"
+        />
       </header>
 
       <main class="content">
@@ -17,7 +21,7 @@
           <div class="profile__container">
             <img
               class="profile__avatar"
-              src="./images/avatar.png"
+              src="<%=require('./images/avatar.png')%>"
               alt="Аватарка"
             />
             <div class="profile__info">
