@@ -1,10 +1,10 @@
-import "../../pages/index.css";
-import { Card } from "../components/Card.js";
-import { FormValidator } from "../components/FormValidator.js";
-import Section from "../components/Section.js";
-import PopupWithImage from "../components/PopupWithImage.js";
-import PopupWithForm from "../components/PopupWithForm.js";
-import UserInfo from "../components/UserInfo.js";
+import "./index.css";
+import { Card } from "../scripts/components/Card.js";
+import { FormValidator } from "../scripts/components/FormValidator.js";
+import Section from "../scripts/components/Section.js";
+import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import UserInfo from "../scripts/components/UserInfo.js";
 
 import {
   imagePopupSelector,
@@ -24,23 +24,18 @@ import {
   initialCards,
   startCards,
   userData,
-} from "../utils/constans.js";
+} from "../scripts/utils/constans.js";
 
 /* Колбэк сабмита попапа редактирования профиля */
 const handleEditSubmitForm = () => {
-  user.setUserInfo(inputName, inputDesсription);
+  user.setUserInfo(popupProfile._getInputValues());
 };
 
 /* Колбэк сабмита попапа добавления картинки */
 const handleAddCardSubmitForm = () => {
-  const cardData = {
-    cardLink: inputCardLink.value,
-    cardName: inputCardName.value,
-  };
-  /* const cardData = addCardPopup._getInputValues(); */
-  const newCard = new Card(cardData, elementTemplate, handleClickImage);
-  cardsSection.addItem(newCard.createCard());
-  formAddCardValidation.disableSubmitButton();
+  const cardData = addCardPopup._getInputValues(); //_getInputValues() - приватный метод. Допустимо ли использовать приватные методы в области глобальной видимости?
+  /* Добавление экземпляра карточки */
+  cardsSection.addItem(createCard(cardData).createCard());
 };
 
 /* Колбэк нажатия картинки */
@@ -67,12 +62,22 @@ popupImage.setEventListeners();
 const user = new UserInfo(userData);
 
 /* Создание стартовых карточек */
-initialCards.forEach((element) => {
-  element = new Card(element, elementTemplate, handleClickImage);
-  startCards.items.push(element.createCard());
-});
-const cardsSection = new Section(startCards, elements);
-cardsSection.startingRendering();
+
+const createCard = (item) => {
+  return new Card(item, elementTemplate, handleClickImage);
+};
+
+const cardsSection = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const card = createCard(item);
+      cardsSection.addItem(card.createCard());
+    },
+  },
+  elements
+);
+cardsSection.renderItems();
 
 /* Включение Валидации форм */
 const formEditProfileValidation = new FormValidator(config, formEditProfile);
@@ -92,4 +97,5 @@ editButton.addEventListener("click", () => {
 /* Открытие попапа добавления карточки */
 addCardButton.addEventListener("click", () => {
   addCardPopup.open();
+  formAddCardValidation.disableSubmitButton();
 });
