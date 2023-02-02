@@ -1,10 +1,10 @@
 import "./index.css";
-import { Card } from "../scripts/components/Card.js";
-import { FormValidator } from "../scripts/components/FormValidator.js";
-import Section from "../scripts/components/Section.js";
-import PopupWithImage from "../scripts/components/PopupWithImage.js";
-import PopupWithForm from "../scripts/components/PopupWithForm.js";
-import UserInfo from "../scripts/components/UserInfo.js";
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 import {
   imagePopupSelector,
@@ -17,14 +17,11 @@ import {
   inputDesсription,
   elements,
   addCardButton,
-  inputCardName,
-  inputCardLink,
   elementTemplate,
   config,
   initialCards,
-  startCards,
   userData,
-} from "../scripts/utils/constans.js";
+} from "../utils/constans.js";
 
 /* Колбэк сабмита попапа редактирования профиля */
 const handleEditSubmitForm = () => {
