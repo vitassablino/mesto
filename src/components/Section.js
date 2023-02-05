@@ -1,8 +1,8 @@
 export default class Section {
-  constructor(data, containerSelector) {
+  constructor(data, container) {
     this._items = data.items;
     this.renderer = data.renderer;
-    this._container = containerSelector;
+    this._container = container;
   }
 
   /* Рендер стартовых объектов */
@@ -14,7 +14,6 @@ export default class Section {
 
   /* Добавление нового элемента в контейнер */
   addItem(item) {
-    /* this.renderer(this._containerSelector, item); */
     this._container.prepend(item);
   }
 }

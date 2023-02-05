@@ -24,15 +24,14 @@ import {
 } from "../utils/constans.js";
 
 /* Колбэк сабмита попапа редактирования профиля */
-const handleEditSubmitForm = () => {
-  user.setUserInfo(popupProfile._getInputValues());
+const handleEditSubmitForm = (data) => {
+  user.setUserInfo(data);
 };
 
 /* Колбэк сабмита попапа добавления картинки */
-const handleAddCardSubmitForm = () => {
-  const cardData = addCardPopup._getInputValues(); //_getInputValues() - приватный метод. Допустимо ли использовать приватные методы в области глобальной видимости?
+const handleAddCardSubmitForm = (data) => {
   /* Добавление экземпляра карточки */
-  cardsSection.addItem(createCard(cardData).createCard());
+  cardsSection.addItem(createCard(data).createCard());
 };
 
 /* Колбэк нажатия картинки */
