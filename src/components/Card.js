@@ -1,9 +1,16 @@
 export class Card {
-  constructor(data, cardTemplate, handleCardClick) {
+  constructor(data, cardTemplate, handleCardClick, userId, api) {
     this._cardName = data.cardName;
-    this._cardLink = data.cardLink
+    this._cardLink = data.cardLink;
+    this._likes = data.likes;
+
     this._temlate = cardTemplate;
     this.handleCardClick = handleCardClick;
+
+    this._api = api;
+    this._id = data._id;
+    this._ownerId = data.owner._id;
+    this._userId = userId;
   }
 
   /*Создание карточки*/
@@ -16,6 +23,16 @@ export class Card {
     this._label.textContent = this._cardName;
     this._image.setAttribute("src", this._cardLink);
     this._image.setAttribute("alt", this._cardName);
+    this._cardLikeCount = this._card.querySelector(".element__like-counter");
+    this._cardLikeCount.textContent = this._likes.length;
+
+    if (!(this._ownerId === this._userId)) {
+      this._deleteButton.style.display = "none";
+    }
+    if (this._likes.find((item) => this._userId === item._id)) {
+      this._like.classList.add("element__like-button_active");
+    }
+
     this.#setEventListeners();
     return this._card;
   }
@@ -32,13 +49,35 @@ export class Card {
 
     this._image.addEventListener("click", () => {
       this.handleCardClick(this._cardName, this._cardLink);
-
     });
   }
 
   /*Обработчик нажатия на лайк */
-  #handleLikeClick() {
+  /*   #handleLikeClick() {
     this._like.classList.toggle("element__like-button_active");
+  } */
+  #handleLikeClick() {
+    if (!this._like.classList.contains("element__like-button_active")) {
+      this._api
+        .like(this._id)
+        .then((item) => {
+          this._like.classList.add("element__like-button_active");
+          this._cardLikeCount.textContent = item.likes.length;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      this._api
+        .notLike(this._id)
+        .then((item) => {
+          this._like.classList.remove("element__like-button_active");
+          this._cardLikeCount.textContent = item.likes.length;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   /*Обработчик нажатия на корзину*/

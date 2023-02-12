@@ -5,6 +5,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api";
 
 import {
   imagePopupSelector,
@@ -21,17 +22,33 @@ import {
   config,
   initialCards,
   userData,
+  apiData,
 } from "../utils/constans.js";
+
+/* API */
+const api = new Api(apiData);
 
 /* Колбэк сабмита попапа редактирования профиля */
 const handleEditSubmitForm = (data) => {
-  user.setUserInfo(data);
+  api.setUserData(data).then((item) => {
+    user.setUserInfo(item);
+    /* console.log(item); */
+    popupProfile.close();
+  });
+  /* user.setUserInfo(data); */
 };
 
 /* Колбэк сабмита попапа добавления картинки */
 const handleAddCardSubmitForm = (data) => {
   /* Добавление экземпляра карточки */
-  cardsSection.addItem(createCard(data).createCard());
+  /* cardsSection.addItem(createCard(data).createCard()); */
+  api
+    .addNewCard(data)
+    .then((item) => {
+      cardsSection.addItem(createCard(item).createCard());
+      addCardPopup.close();
+    })
+    .catch((err) => console.log(err));
 };
 
 /* Колбэк нажатия картинки */
@@ -60,12 +77,11 @@ const user = new UserInfo(userData);
 /* Создание стартовых карточек */
 
 const createCard = (item) => {
-  return new Card(item, elementTemplate, handleClickImage);
+  return new Card(item, elementTemplate, handleClickImage, userId, api);
 };
 
 const cardsSection = new Section(
   {
-    items: initialCards,
     renderer: (item) => {
       const card = createCard(item);
       cardsSection.addItem(card.createCard());
@@ -73,7 +89,7 @@ const cardsSection = new Section(
   },
   elements
 );
-cardsSection.renderItems();
+/* cardsSection.renderItems(); */
 
 /* Включение Валидации форм */
 const formEditProfileValidation = new FormValidator(config, formEditProfile);
@@ -95,3 +111,15 @@ addCardButton.addEventListener("click", () => {
   addCardPopup.open();
   formAddCardValidation.disableSubmitButton();
 });
+
+let userId;
+
+api
+  .getData()
+  .then(([cards, userData]) => {
+    user.setUserInfo(userData);
+    userId = userData._id;
+
+    cardsSection.renderItems(cards);
+  })
+  .catch((err) => console.log(err));

@@ -1,13 +1,19 @@
 export default class Section {
   constructor(data, container) {
-    this._items = data.items;
+    /* this._items = data.items; */
     this.renderer = data.renderer;
     this._container = container;
   }
 
+  /* Очистка контейнера */
+  clear() {
+    this._container.innerHTML = "";
+  }
+
   /* Рендер стартовых объектов */
-  renderItems() {
-    this._items.forEach((item) => {
+  renderItems(items) {
+    this.clear();
+    items.forEach((item) => {
       this.renderer(item);
     });
   }

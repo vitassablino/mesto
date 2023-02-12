@@ -68,7 +68,17 @@ const startCards = {
 /* Конфиг для информации о пользователе */
 const userData = {
   name: document.querySelector(".profile__name"),
-  description: document.querySelector(".profile__description"),
+  about: document.querySelector(".profile__description"),
+  avatar: document.querySelector(".profile__avatar"),
+};
+
+/* Данные для Api mesto.nomoreparties.co */
+const apiData = {
+  url: "https://mesto.nomoreparties.co/v1/cohort-59",
+  headers: {
+    authorization: "44c0c0c8-2249-4c66-a825-6f516eb82eac",
+    "Content-Type": "application/json",
+  },
 };
 
 export {
@@ -89,4 +99,5 @@ export {
   initialCards,
   startCards,
   userData,
+  apiData,
 };
