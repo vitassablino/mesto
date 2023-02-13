@@ -65,8 +65,25 @@ export default class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        name: items.name,
-        link: items.link,
+        name: items.cardName,
+        link: items.cardLink,
+      }),
+    }).then(this.#checkResponse);
+  }
+
+  delete(id) {
+    return fetch(this._url + `/cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(this.#checkResponse);
+  }
+
+  editAvatar(items) {
+    return fetch(this._url + "/users/me/avatar", {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: items.avatar,
       }),
     }).then(this.#checkResponse);
   }

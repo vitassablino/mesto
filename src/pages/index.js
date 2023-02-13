@@ -5,7 +5,8 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import Api from "../components/Api";
+import Api from "../components/Api.js";
+import PopupWithDeletingConfirm from "../components/PopupWithDeletingConfirm.js";
 
 import {
   imagePopupSelector,
@@ -20,35 +21,59 @@ import {
   addCardButton,
   elementTemplate,
   config,
-  initialCards,
   userData,
   apiData,
+  popupWithConfirm,
+  popupAvatarEdit,
+  avatarEditButton,
+  formEditAvatar,
 } from "../utils/constans.js";
 
 /* API */
 const api = new Api(apiData);
 
+/* Колбэк нажатия на кнопку удаления */
+/* const handleDeletingConfirm = (item, deleteCard) => {
+  popupWithDeletingConfirm.setSubmitAction(() => {
+    api
+      .delete(item.id)
+      .then(() => {
+        deleteCard;
+        popupWithDeletingConfirm.close();
+      })
+      .catch((err) => console.log(err));
+  });
+  popupWithDeletingConfirm.open();
+}; */
+
 /* Колбэк сабмита попапа редактирования профиля */
 const handleEditSubmitForm = (data) => {
-  api.setUserData(data).then((item) => {
-    user.setUserInfo(item);
-    /* console.log(item); */
-    popupProfile.close();
-  });
+  popupProfile.rendering(true);
+  api
+    .setUserData(data)
+    .then((item) => {
+      user.setUserInfo(item);
+      /* console.log(item); */
+      popupProfile.close();
+    })
+    .catch((err) => console.log(err))
+    .finally(() => popupProfile.rendering(false));
   /* user.setUserInfo(data); */
 };
 
 /* Колбэк сабмита попапа добавления картинки */
-const handleAddCardSubmitForm = (data) => {
+const handleAddCardSubmitForm = (items) => {
   /* Добавление экземпляра карточки */
   /* cardsSection.addItem(createCard(data).createCard()); */
+  addCardPopup.rendering(true);
   api
-    .addNewCard(data)
+    .addNewCard(items)
     .then((item) => {
       cardsSection.addItem(createCard(item).createCard());
       addCardPopup.close();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => addCardPopup.rendering(false));
 };
 
 /* Колбэк нажатия картинки */
@@ -69,15 +94,53 @@ const addCardPopup = new PopupWithForm(
 );
 addCardPopup.setEventListeners();
 
+const avatarEditPopup = new PopupWithForm(popupAvatarEdit, (items) => {
+  avatarEditPopup.rendering(true);
+  api
+    .editAvatar(items)
+    .then((item) => {
+      user.setUserAvatar(item);
+      avatarEditPopup.close();
+    })
+    .catch((err) => console.log(err))
+    .finally(() => avatarEditPopup.rendering(false));
+});
+
+avatarEditPopup.setEventListeners();
+
 const popupImage = new PopupWithImage(imagePopupSelector);
 popupImage.setEventListeners();
+
+const popupWithDeletingConfirm = new PopupWithDeletingConfirm(popupWithConfirm);
+popupWithDeletingConfirm.setEventListeners();
 
 const user = new UserInfo(userData);
 
 /* Создание стартовых карточек */
 
 const createCard = (item) => {
-  return new Card(item, elementTemplate, handleClickImage, userId, api);
+  const card = new Card(
+    {
+      data: item,
+      cardTemplate: elementTemplate,
+      handleCardClick: handleClickImage,
+      handleDeletingConfirm: () => {
+        popupWithDeletingConfirm.setSubmitAction(() => {
+          api
+            .delete(item._id)
+            .then(() => {
+              card.deleteCard();
+              popupWithDeletingConfirm.close();
+            })
+            .catch((err) => console.log(err));
+        });
+        popupWithDeletingConfirm.open();
+      },
+    },
+    userId,
+    api
+  );
+  return card;
 };
 
 const cardsSection = new Section(
@@ -98,11 +161,14 @@ formEditProfileValidation.enableValidation();
 const formAddCardValidation = new FormValidator(config, formAddCard);
 formAddCardValidation.enableValidation();
 
+const formEditAvatarValidation = new FormValidator(config, formEditAvatar);
+formEditAvatarValidation.enableValidation();
+
 /*Открытие попапа редактирования данных*/
 editButton.addEventListener("click", () => {
   const userConfig = user.getUserInfo();
   inputName.value = userConfig.name;
-  inputDesсription.value = userConfig.description;
+  inputDesсription.value = userConfig.about;
   popupProfile.open();
 });
 
@@ -110,6 +176,12 @@ editButton.addEventListener("click", () => {
 addCardButton.addEventListener("click", () => {
   addCardPopup.open();
   formAddCardValidation.disableSubmitButton();
+});
+
+/* Открытие попапа редактирования аватара */
+avatarEditButton.addEventListener("click", () => {
+  avatarEditPopup.open();
+  formEditAvatarValidation.disableSubmitButton();
 });
 
 let userId;

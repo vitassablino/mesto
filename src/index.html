@@ -19,11 +19,14 @@
       <main class="content">
         <section class="profile">
           <div class="profile__container">
-            <img
-              class="profile__avatar"
-              src="<%=require('./images/avatar.png')%>"
-              alt="Аватарка"
-            />
+            <div class="profile__avatar-container">
+              <img
+                class="profile__avatar"
+                src="<%=require('./images/avatar.png')%>"
+                alt="Аватарка"
+              />
+              <div class="profile__avatar-button"></div>
+            </div>
             <div class="profile__info">
               <h1 class="profile__name"></h1>
               <button
@@ -139,6 +142,56 @@
             type="button"
           ></button>
         </div>
+      </div>
+    </div>
+
+    <div class="popup" id="popup_deleting-confirm">
+      <div class="popup__form">
+        <h3 class="popup-form__header">Вы уверены?</h3>
+        <form
+          name="popup_deleting-confirm"
+          class="popup-form"
+          id="popup-form-delete"
+          novalidate
+        >
+          <button
+            type="submit"
+            class="popup-form__save-button"
+            id="delete-card"
+          >
+            Да
+          </button>
+        </form>
+        <button
+          aria-label="Закрыть форму ввода"
+          class="popup__close-button"
+          type="button"
+        ></button>
+      </div>
+    </div>
+
+    <div class="popup" id="popup-avatar-edit">
+      <div class="popup__form">
+        <h3 class="popup-form__header">Обновить аватар</h3>
+        <form name="popup-avatar-edit" class="popup-form" novalidate>
+          <input
+            type="url"
+            id="avatar"
+            name="avatar"
+            class="popup-form__input"
+            placeholder="Ссылка на изображение"
+            required
+          />
+          <span class="popup-form__input-error" id="avatar-error"></span>
+          <button type="submit" class="popup-form__save-button">
+            Сохранить
+          </button>
+        </form>
+        <button
+          aria-label="Закрыть форму ввода"
+          class="popup__close-button"
+          type="button"
+        ></button>
       </div>
     </div>
 

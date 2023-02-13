@@ -1,16 +1,26 @@
+import { data } from "autoprefixer";
+
 export class Card {
-  constructor(data, cardTemplate, handleCardClick, userId, api) {
-    this._cardName = data.cardName;
-    this._cardLink = data.cardLink;
+  constructor(
+    { data, cardTemplate, handleCardClick, handleDeletingConfirm },
+    userId,
+    api
+  ) {
+    this._data = data;
+    this._cardName = data.name;
+    this._cardLink = data.link;
     this._likes = data.likes;
+    this._id = data._id;
+    this._ownerId = data.owner._id;
 
     this._temlate = cardTemplate;
     this.handleCardClick = handleCardClick;
 
     this._api = api;
-    this._id = data._id;
-    this._ownerId = data.owner._id;
+
     this._userId = userId;
+
+    this._handleDeletingConfirm = handleDeletingConfirm;
   }
 
   /*Создание карточки*/
@@ -44,7 +54,7 @@ export class Card {
     });
 
     this._deleteButton.addEventListener("click", () => {
-      this.#handleDeleteButtonClick();
+      this._handleDeletingConfirm();
     });
 
     this._image.addEventListener("click", () => {
@@ -81,7 +91,7 @@ export class Card {
   }
 
   /*Обработчик нажатия на корзину*/
-  #handleDeleteButtonClick() {
+  deleteCard() {
     this._card.remove();
   }
 

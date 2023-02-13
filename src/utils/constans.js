@@ -9,11 +9,15 @@ const addCardButton = document.querySelector(".profile__add-button");
 const inputCardName = document.querySelector("#cardName");
 const inputCardLink = document.querySelector("#cardLink");
 const elementTemplate = document.querySelector("#element-template").content;
+const avatarEditButton = document.querySelector(".profile__avatar-button");
+const formEditAvatar = document.querySelector("#popup-avatar-edit");
 
 /* Селекторы */
 const imagePopupSelector = document.querySelector("#image-container");
 const popupProfileSelector = document.querySelector("#edit-popup");
 const popupAddCardSelector = document.querySelector("#card-popup");
+const popupWithConfirm = document.querySelector("#popup_deleting-confirm");
+const popupAvatarEdit = document.querySelector("#popup-avatar-edit");
 
 /* Объекты */
 const config = {
@@ -100,4 +104,8 @@ export {
   startCards,
   userData,
   apiData,
+  popupWithConfirm,
+  popupAvatarEdit,
+  avatarEditButton,
+  formEditAvatar,
 };
